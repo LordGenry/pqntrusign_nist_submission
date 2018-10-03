@@ -1,0 +1,1252 @@
+%\documentclass[10pt]{acmlarge}
+%\documentclass[10pt, onepage]{IEEEtran}
+%\documentclass[10pt]{llncs}
+\documentclass{llncs}
+\usepackage{amssymb,amscd,amsmath,url}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{hyperref}\usepackage{multirow}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\renewcommand{\qed}{\hfill\blacksquare}
+%\allowdisplaybreaks
+
+% Theorem environments
+
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{question}[theorem]{Question}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+
+%\theoremstyle{definition}
+% The * surpresses numbering
+%\newtheorem*{definition}{Definition}
+\newtheorem{heuristic}{Heuristic}
+\newtheorem{assumption}{Assumption}
+
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Remark}
+%\newtheorem*{acknowledgement}{Acknowledgements}
+
+%\newcommand\claim[2]{\par\vspace{1ex minus 0.5ex}\noindent%
+%\textbf{Claim #1}.\enspace\emph{#2}.\par\noindent\ignorespaces}
+
+%\numberwithin{equation}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%% Set Up Environment for Parts in Theorems %%%%%%%%%%%%%%
+\newenvironment{parts}[0]{%
+  \begin{list}{}%
+    {\setlength{\itemindent}{0pt}
+     \setlength{\labelwidth}{1.5\parindent}
+     \setlength{\labelsep}{.5\parindent}
+     \setlength{\leftmargin}{2\parindent}
+     \setlength{\itemsep}{0pt}
+     }%
+   }%
+  {\end{list}}
+% Use \Part{(a)}, instead of \item[(a)], to ensure upright font
+\newcommand{\Part}[1]{\item[\upshape#1]}
+
+%%%%%%%%%%%%%%%%%%
+% Greek Alphabet %
+%%%%%%%%%%%%%%%%%%
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\g}{\gamma}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\epsilon}
+\newcommand{\f}{\phi}
+\renewcommand{\l}{\lambda}
+\renewcommand{\k}{\kappa}
+\newcommand{\lhat}{\hat\lambda}
+\newcommand{\m}{\mu}
+\newcommand{\bfmu}{{\boldsymbol{\mu}}}
+\renewcommand{\o}{\omega}
+\renewcommand{\r}{\rho}
+\newcommand{\rbar}{{\bar\rho}}
+\newcommand{\s}{\sigma}
+\newcommand{\sbar}{{\bar\sigma}}
+\renewcommand{\t}{\tau}
+\newcommand{\z}{\zeta}
+
+\newcommand{\D}{\Delta}
+\newcommand{\G}{\Gamma}
+\newcommand{\F}{\Phi}
+
+%%%%%%%%%%%%%%%%%%%%
+% Fraktur Alphabet %
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ga}{{\mathfrak{a}}}
+\newcommand{\gb}{{\mathfrak{b}}}
+\newcommand{\gn}{{\mathfrak{n}}}
+\newcommand{\gp}{{\mathfrak{p}}}
+\newcommand{\gP}{{\mathfrak{P}}}
+\newcommand{\gq}{{\mathfrak{q}}}
+
+%%%%%%%%%%%%%%%%%%%
+% Barred Alphabet %
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\Abar}{{\bar A}}
+\newcommand{\Ebar}{{\bar E}}
+\newcommand{\Pbar}{{\bar P}}
+\newcommand{\Sbar}{{\bar S}}
+\newcommand{\Tbar}{{\bar T}}
+\newcommand{\ybar}{{\bar y}}
+\newcommand{\phibar}{{\bar\phi}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Calligraphic Alphabet %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Acal}{{\mathcal A}}
+\newcommand{\Bcal}{{\mathcal B}}
+\newcommand{\Ccal}{{\mathcal C}}
+\newcommand{\Dcal}{{\mathcal D}}
+\newcommand{\Ecal}{{\mathcal E}}
+\newcommand{\Fcal}{{\mathcal F}}
+\newcommand{\Gcal}{{\mathcal G}}
+\newcommand{\Hcal}{{\mathcal H}}
+\newcommand{\Ical}{{\mathcal I}}
+\newcommand{\Jcal}{{\mathcal J}}
+\newcommand{\Kcal}{{\mathcal K}}
+\newcommand{\Lcal}{{\mathcal L}}
+\newcommand{\Mcal}{{\mathcal M}}
+\newcommand{\Ncal}{{\mathcal N}}
+\newcommand{\Ocal}{{\mathcal O}}
+\newcommand{\Pcal}{{\mathcal P}}
+\newcommand{\Qcal}{{\mathcal Q}}
+\newcommand{\Rcal}{{\mathcal R}}
+\newcommand{\Scal}{{\mathcal S}}
+\newcommand{\Tcal}{{\mathcal T}}
+\newcommand{\Ucal}{{\mathcal U}}
+\newcommand{\Vcal}{{\mathcal V}}
+\newcommand{\Wcal}{{\mathcal W}}
+\newcommand{\Xcal}{{\mathcal X}}
+\newcommand{\Ycal}{{\mathcal Y}}
+\newcommand{\Zcal}{{\mathcal Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Blackboard Bold Alphabet %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Boldface Math Alphabet %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bfa}{{\bf a}}
+\newcommand{\bfb}{{\bf b}}
+\newcommand{\bfc}{{\bf c}}
+\newcommand{\bfe}{{\bf e}}
+\newcommand{\bfep}{{\bf \epsilon}}
+\newcommand{\bff}{{\bf f}}
+\newcommand{\bfg}{{\bf g}}
+\newcommand{\bfh}{{\bf h}}
+\newcommand{\bfm}{{\bf m}}
+\newcommand{\bfn}{{\bf n}}
+\newcommand{\bfp}{{\bf p}}
+\newcommand{\bfr}{{\bf r}}
+\newcommand{\bfs}{{\bf s}}
+\newcommand{\bft}{{\bf t}}
+\newcommand{\bfu}{{\bf u}}
+\newcommand{\bfv}{{\bf v}}
+\newcommand{\bfw}{{\bf w}}
+\newcommand{\bfW}{{\bf W}}
+\newcommand{\bfx}{{\bf x}}
+\newcommand{\bfy}{{\bf y}}
+\newcommand{\bfz}{{\bf z}}
+\newcommand{\bfA}{{\bf A}}
+\newcommand{\bfF}{{\bf F}}
+\newcommand{\bfB}{{\bf B}}
+\newcommand{\bfC}{{\bf C}}
+\newcommand{\bfG}{{\bf G}}
+\newcommand{\bfH}{{\bf H}}
+\newcommand{\bfI}{{\bf I}}
+\newcommand{\bfM}{{\bf M}}
+\newcommand{\bfP}{{\bf P}}
+\newcommand{\bfS}{{\bf S}}
+\newcommand{\bfT}{{\bf T}}
+\newcommand{\bfzero}{{\bf{0}}}
+\newcommand{\bfU}{{\bf U}}
+\newcommand{\bfV}{{\bf V}}
+\newcommand{\pqntrusign}{{\sf{pqNTRUSign}}}
+\newcommand{\ntru}{{\sf{NTRU}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Miscellaneous New Commands %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Disc}{\operatorname{Disc}}
+\newcommand{\Div}{\operatorname{Div}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\Index}{\operatorname{Index}}
+\newcommand{\Image}{\operatorname{Image}}
+\newcommand{\LCM}{\operatorname{LCM}}
+\newcommand{\Lift}{\operatorname{Lift}}
+\newcommand{\liftable}{{\textup{liftable}}}
+\newcommand{\LS}[2]{{\genfrac{(}{)}{}{}{#1}{#2}}} % Legendre symbol
+\newcommand{\tLS}[2]{(#1{}|{}#2)} % Legendre symbol in text (a|b)
+\newcommand{\hhat}{{\hat h}}
+\newcommand{\Ker}{{\operatorname{ker}}}
+\newcommand{\MOD}[1]{~(\textup{mod}~#1)}
+\newcommand{\Norm}{{\operatorname{\mathsf{N}}}}
+\newcommand{\notdivide}{\nmid}
+\newcommand{\normalsubgroup}{\triangleleft}
+\newcommand{\odd}{{\operatorname{odd}}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Prob}{\operatorname{Prob}}
+\newcommand{\Qbar}{{\bar{\QQ}}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Resultant}{\operatorname{Resultant}}
+\renewcommand{\setminus}{\smallsetminus}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\tors}{{\textup{tors}}}
+\newcommand{\Trace}{\operatorname{Trace}}
+\newcommand{\UHP}{{\mathfrak{h}}}    % Upper half plane
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+\newcommand{\longhookrightarrow}{\lhook\joinrel\longrightarrow}
+\newcommand{\longonto}{\relbar\joinrel\twoheadrightarrow}
+\newcommand{\bens}{\begin{eqnarray}}
+\newcommand{\eens}{\end{eqnarray}}
+
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+                     \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+                     =}
+                     
+\newcommand{\LINEFOR}[2]{%
+    \STATE\algorithmicfor\ {#1}\ \algorithmicdo\ {#2} \algorithmicend\ \algorithmicfor%
+}                     
+\newcommand{\LineIf}[2]{ \STATE \algorithmicif\ {#1}\ \algorithmicthen\ {#2} \algorithmicend\ \algorithmicif }
+\newcommand{\pluseq}{\mathrel{+}=}        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+
+\title{
+	NIST PQ Submission: pqNTRUSign\\
+	A modular lattice signature scheme
+}
+
+\author{Cong Chen \inst{2} \and Jeffrey Hoffstein \inst{1}  \and William Whyte \inst{2} \and Zhenfei Zhang \inst{2} 
+}
+\institute{Brown University, Providence RI, USA,\ \email{jhoff@math.brown.edu} \and 
+OnBoard Security, Wilmington MA, USA,\ \email{\{cchen,wwhyte,zzhang\}@onboardsecurity.com}
+}
+\date{\today}
+\maketitle
+%\maketitle
+%\begin{abstract}
+
+
+%\end{abstract}
+
+%\clearpage
+
+%\tableofcontents
+
+%\clearpage
+
+\section{Cover Sheet}
+This is an overview document of the NTRU lattice-based cryptosystem for the submission of NIST post-quantum cryptography call for 
+standardization.
+The submitted cryptosystem consists of : 
+
+\begin{itemize}
+\item {\bf pqNTRUSign}: a modular lattice based digital signature scheme that uses the NTRU lattice with either a uniform \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14} or 
+a Gaussian sampler \cite{cryptoeprint:2017:995}.
+\end{itemize}
+
+\noindent
+This documents addresses the following  requirements:
+
+\begin{itemize}
+\item {\bf Specifications}
+\item {\bf Performance analysis}
+\item {\bf A statement of the advantages and limitations}
+\item {\bf Cover sheet}
+\item {\bf Reference implementation}
+\item {\bf Security analysis}
+\item {\bf Statement of IPR}
+\end{itemize}
+
+\noindent
+Submission information:
+\begin{itemize}
+\item {\bf Principal submitter:} Zhenfei Zhang, zzhang@onboardsecurity.com, Onboard Security, 187 Ballardvale St. Suite A202, Wilmington, MA, 01887, U.S.
+\item {\bf Auxiliary submitters:}
+Chen Cong, Jeffrey Hoffstein and William Whyte.
+\item {\bf 
+Inventors of the cryptosystem:} Jeffrey Hoffstein,
+               Jill Pipher,
+               John M. Schanck,
+               Joseph H. Silverman,
+               William Whyte and
+               Zhenfei Zhang.
+\item {\bf Name of the owner of the cryptosystem:} 
+Onboard Security.      
+
+\item {\bf Backup point of contact:} William Whyte, wwhyte@onboardsecurity.com, Onboard Security, 187 Ballardvale St. Suite A202, Wilmington, MA, 01887, U.S.
+     
+\end{itemize}
+
+The following academic papers contain
+cryptographic designs, 
+hardness results,
+security analysis and parameter derivations 
+related to the submitted cryptosystem.
+
+\begin{itemize}
+\item {\em NTRU, A ring-based public key cryptosystem}, 1998.
+\item {\em Transcript Secure Signatures Based on Modular Lattices}, 2014.
+\item {\em A signature scheme from Learning with Truncation}, 2017.
+\item {\em Choosing parameters for NTRUEncrypt}, 2017.
+
+\end{itemize}
+
+
+Additional information related to implementations, such as public key/private key encodings, 
+conversions, etc. can be found in the additional supporting document:
+
+\begin{itemize}
+\item {\em Efficient Embedded Security Standard (EESS) \#1.} Version 3.3, 2017.
+\end{itemize}
+
+Information regarding estimating the strength of \ntru~lattices against various attacks can be found in 
+our other submission on \ntru~encryption algorithms.
+
+\section{Algorithm Specifications}% and Supporting Documentation}
+\subsection{Notation}
+We use lower case bold letters for vectors, upper case bold letters for matrices.
+For a polynomial $f(x) = f_0+f_1x+\dots+ f_{n-1}x^{n-1}$, 
+we denote its vector form by $\bff \defeq \left<f_0, f_1, \dots, f_{n-1}\right>$.  We sometimes abuse the notation of vector and polynomial when there is no ambiguity.
+For a polynomial/vector $\bff$, the norms are $\|\bff\| \defeq \sqrt{\sum_{i=0}^{n-1}f_i^2}$ and $\|\bff\|_\infty \defeq \max(|f_i|)$. 
+
+We often use the polynomial rings $\Rcal_q \defeq \ZZ[x]/F(x)$ with $F(x) = x^n\pm 1$. %When
+%an element of $\ZZ_q$ is lifted to $\ZZ$, or reduced modulo $q$, it is identified with its
+%unique representative in $[-q/2,q/2)\cap \ZZ$.
+A cyclic rotated matrix of a polynomial $f(x)$ over the ring $\Rcal_q$
+is a matrix $\bfM = (\bff_1,\bff_2,\dots,\bff_n)^T$ with $\bff_i = f(x)x^{i-1}\bmod F(x)$.
+If  $F(x) = x^n- 1$ it is literally cyclic, and it is close to cyclic, up to signs, if $F(x) = x^n + 1$.
+
+For a real $a$, we let 
+$\lfloor a\rceil$ denote the closet integer to $a$.
+ For an integer $a$, we use
+$[a]_q$ to denote $a\bmod q$; $\lfloor a\rfloor_p \defeq (a - [a]_p )/p$ for the operation of rounding $a$ to the closest multiple of $p$. 
+Modular operations are center lifted, for example $a\bmod q$ returns an integer within $-q/2$ and $q/2$. These notations are also extended to vectors and matrices.
+
+We use $\chi_\sigma^k$ to denote a $k$ dimensional
+discrete Gaussian distribution with a deviation of
+$\sigma$. A $k$-dimensional uniform distribution
+modulo $q$ is denoted by $\mathcal{U}_q^k$.
+
+\subsection{High level Construction}
+The modular lattice signature scheme was first presented in \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14}. 
+Given a lattice $\Lcal$ with a trapdoor $\bf T$ in the form of a short basis of row vectors; and a message digest in the form of a vector $\bfm$ whose coefficients are in $[0, p)$, 
+the signature of a modular signature scheme in \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14} is a lattice vector 
+$\bfv$ such that
+\begin{enumerate}
+\item $\bfv \equiv \bfm \bmod p$; and 
+\item $\bfv \in \Lcal$.
+\end{enumerate}
+This vector can be obtained via the following steps:
+\begin{enumerate}
+\item sample a vector $\bfv_0$ from $\Lcal$;
+\item use $\bfT$ to micro-adjust the $\bfv_0$ so that $\bfv \defeq \bfv_0 + \bfa\bfT$ meets the congruence condition for some $\bfa$;
+\item use rejection sampling to hide $\bfT$ from $\bfv$
+\end{enumerate}
+%In this paper we revisit the above scheme from
+%the following perspectives. 
+
+At a high level, a modular lattice signature scheme is as follows.
+Let $m$, $n$ and $k$ be $3$ positive integers with $n = k+m$.
+Let $\bfS_1 \in \ZZ_q^{m\times k}$ % and $\bfS_2 \in \ZZ_q^{m\times m}$
+% be two matrices 
+be a matrix with small (and sparse) coefficients.
+For simplicity, we assume $\bfS_1$ is sampled from a certain $\beta$-bounded
+sampler such that $\|\bfS_1\|_\infty\leq \beta \ll q$.
+In practice one can use either a discrete Gaussian sampler with small
+variance, or a uniform sampler within a small range.
+
+Our secret key is a matrix $\bfS \defeq [p\bfS_1|\bfI_m]\in \ZZ_q^{m\times n}$ with small entries. 
+%with small (and sparse) coefficients;
+%write $S \defeq [S_1 |S_2]$ where 
+The public key is constructed from a matrix $\bfA = \begin{bmatrix}
+\bfA_1\\\bfA_2
+\end{bmatrix}$
+such that $\bfS\bfA = 0 \bmod q$ and $\bfA_2$ is invertible mod $  q$. Equivalently, we can sample $\bfA_1$ uniformly from $\ZZ_q^{k\times m}$, and then set
+$\bfA_2 = -p\bfS_1\bfA_1 \bmod q$.  We re-sample $\bfA_1$ if $\bfA_2$ is not invertible  mod $  q$.
+The SIS lattice defined by $\bfA$ is:
+\[\Lcal \defeq \{(\bfu,\bfv): \bfu \bfA_1+\bfv\bfA_2 = 0 \bmod q\},\]
+where $\bfS$ is a short trapdoor basis for this lattice. 
+Note that the procedure above is a standard construction for the SIS problem, except that we have a factor of $p$ on $\bfS_1$. We will show the equivalence between our construction and the standard SIS problem in the next subsection.
+
+It is perhaps more convenient to look at 
+%The actual public key is 
+a $k\times m$ matrix $\bfB\defeq \bfA_1(-\bfA_2)^{-1} \bmod q$. With $\bfB$, the lattice $\Lcal$ can be interpreted as 
+\[\Lcal \defeq \{(\bfu,\bfv): \bfu \bfB = \bfv\bmod q\},\]
+with a Learning with Error (LWE) basis
+\[\bf P  = \begin{bmatrix}
+0& q\bfI_m \\
+\bfI_k& \bfB 
+\end{bmatrix}
+\]
+that allows for efficient sampling.
+
+\paragraph{Signing:} 
+We model the hash function $H$ as a random oracle that outputs uniformly over $\ZZ_p^n$. This allows us to generate random elements 
+$\bfm_p \in \ZZ_p^n$ from a message digest $\mu$. 
+We write $\bfm_p \defeq (\bfu_p, \bfv_p)$, with $\bfu_p\in\ZZ_p^k$
+and  $\bfv_p\in\ZZ_p^m$.
+
+The next step is to sample a vector $(\bfu_1, \bfv_1)$ from $\bfP$ such $\bfu_1 \equiv \bfu_p \bmod p$.
+To do so, one can simply sample a vector $\bfr$
+from a given distribution ($\chi^k_\sigma$ or $\mathcal U^k_q)$. 
+Then, compute $\bfu_0 = p\bfr$, $\bfu_1 = \bfu_0 + \bfu_p$, and then find a lattice vector whose ``$s$-side" is $\bfu_1$ by setting $
+\bfv_1 = \bfu_1\bfB\bmod q$.  As such, $(\bfu_1, \bfv_1)$ is a vector in the lattice, with $\bfu_1 \equiv \bfu_p \bmod p$. 
+
+%\begin{remark}
+%An alternative way to view
+%%The first step of 
+%the above procedure %can be seen as generating a 
+%is to generate a
+%random vector $(\bfr, \bfr\bfB \bmod q)$ in the lattice.
+%%Without loss of generality, assume $b = 1$.
+%By definition, the matrix $[\bfI_k | \bfB]$ is a basis of a sub-lattice of $\Lcal(\bfP)$.
+%Also, since $\bfr$ is sampled from a discrete Gaussian distribution, this random vector
+%can be  viewed
+%as an output of a GPV sampler \cite{GPV08} over $\Lcal([\bfI_k | \bfB])$. If $\sigma$ is greater than the smoothing parameter of $\Lcal([\bfI_k | \bfB])$, the vector $\bfr([\bfI_k | \bfB])$ will be uniform over $\Lcal([\bfI_k | \bfB])$ and a discrete Gaussian over $\ZZ^n$.
+%Then we take this vector modulo $q$ to obtain the exact output vector.
+%Let $\bfv_0 = \bfu_0\bfB \bmod q$; $\bfr' = (\bfu_0\bfB-\bfv_0)/q$. Then one can view $(\bfu_0, \bfv_0)$  as $(\bfu_0, \bfv_0) = p(\bfr',\bfr) \bfP$.
+%Since $\bfr$ is sampled from a discrete Gaussian distribution, 
+%and $\bfr'$ also follows a Gaussian distribution with a larger deviation, 
+%this process can be viewed
+%as a variant of the GPV sampler \cite{GPV08}, although here $\bfr'$ is deterministic rather than 
+%sampled from a Gaussian distribution, as in the GPV sampler. If $\sigma$ is greater than the smoothing parameter of $\Lcal([\bfI | \bfH])$, the vector $\bfr([\bfI | \bfH]$ will be uniform over $\Lcal([\bfI | \bfH])$ and discrete Gaussian over $\ZZ^n$.
+%Then we take this vector modulo p to obtain the exact output vector.
+%\end{remark}
+
+We expect $\bfv_1$ to have 
+%Since $\bfv_1$ is discrete Gaussian over $\ZZ^n$, it will have 
+random coefficients modulo $p$, and therefore it will not meet the congruence condition. 
+%The vector $\bfv_1 = \bfu_1\bfB$ will not meet the congruence condition as it will appear to have random coefficients modulo $p$ due to the leftover hash lemma \cite{DBLP:conf/stoc/ImpagliazzoLL89}, as $\bfB$ is random and $\bfu_1$ has enough entropy.
+ To complete the process, we 
+need to micro-adjust $\bfv_1$ so that the $t$-side also meets the congruence condition; in the meantime we do not want to break the 
+congruence condition on the $s$-side.
+We use the secret basis $\bfS = [p\bfS_1|\bfI_m]$ to achieve this goal. 
+Let $\bfa = \bfv_p-\bfv_1 \bmod p$.
+We compute $(\bfu_2,\bfv_2)= \bfa\bfS = (p\bfa\bfS_1,\bfa)$. Note that $(\bfu_2,\bfv_2)\equiv (0,\bfa) \bmod p$ by construction, and $(\bfu_2,\bfv_2)$ is a vector in the lattice.
+
+The final signature is $(\bfu,\bfv) = (\bfu_1, \bfv_1) + (\bfu_2, \bfv_2)$. It is easy to see that $(\bfu,\bfv)$ remains in the lattice as long as $\|\bfv\|_\infty < q/2$. On the other hand, we have
+
+\[\bfu  = \bfu_1 +\bfu_2  = \bfu_1  \equiv  \bfu_p \bmod p\]
+and 
+\[\bfv=\bfv_1  +\bfv_2  \equiv \bfv_1 + \bfv_p - \bfv_1 \equiv \bfv_p \bmod p .\]
+Therefore, $(\bfu,\bfv)$  is a valid signature for our scheme.
+
+
+\begin{remark}
+As stated before, a candidate signature $(\bfu,\bfv)$ leaks information about the secret key $\bfS$. To seal this leak
+one needs to use a rejection sampling technique \cite{MR2593089}.
+ The efficiency of the above scheme relies heavily
+on how often one will need to reject a signature.
+We will give more details on this in the next section.
+\end{remark}
+\subsection{Ring variant}
+%\subsection{Overview}
+In the following we will work over the polynomial ring $\Rcal_q = \ZZ_q[x]/(x^N + 1)$.
+Our scheme also works over  other rings, such as $\ZZ_q[x]/(x^N - 1)$ with minor modification.
+Let $f(x)$, $g(x)$ and $h(x)$ be $3$ polynomials in $\Rcal_q$,
+where $f(x)$ and $g(x)$ have very small coefficients; $h(x) = p^{-1}g(x)f^{-1}(x)$.  We express by
+$\bff$, $\bfg$  and  $\bfh$ the vector form of the polynomials. Also let $\bfF$, $\bfG$ and  $\bfH$ be the matrix  obtained from 
+nega-cyclic rotations.
+The NTRU lattice with regard to $h$ is defined as 
+\[
+\Lcal_h = \{(u,v) \in \Rcal_q^2: uh = v\}
+\]
+or rather, the vector/matrix form:
+\[
+\Lcal_h = \{(\bfu,\bfv): \bfu\bfH = \bfv \bmod q\}
+\]
+where there exists a public basis
+$\bf P  = \begin{bmatrix}
+0& q\bfI_N \\
+\bfI_N& \bfH 
+\end{bmatrix}
+$
+and a secret generator
+$
+[p\bfF|\bfG]
+$. We also require $g(x)$ to be invertible over $\Rcal_p$,
+which is the same as  having $\bfG$ being invertible mod $p$.
+
+%The rest of the scheme is almost identical to the one presented in
+%the previous section, except %for two differences. 
+%that
+%First, we use a bimodal Gaussian distribution to improve the acceptance rate.
+%To cope with this modification, we set $p=2$ so that the change of signs
+%in $\bfb = \bfr \pm\bfa\bff$ will vanish after reduction modulo $p$.
+%This modification does raise another issue: we need to perform 
+%rejection sampling to seal the leakage on ``$t$-side", as now
+%the $t$-side vector does contain information about the secret key
+%$\bfG$.
+%Second, 
+%
+Now we will use  $[p\bfF|\bfG]$ (rather 
+than $[p\bfS_1|\bfI_m]$) to perform the micro-adjustment.
+This modification does raise another issue: 
+the ``$t$-side" vector during the signing procedure will contain
+information about $\bfG$. To be precise, 
+the ``$t$-side" vector will be $\bfv\defeq \bfv_1\pm\bfa\bfg$ where 
+$\bfv_1$ is indistinguishable from uniform over $\Rcal_q$, and $\bfa$
+is uniform over $\ZZ_p^N$.
+We will need to perform 
+rejection sampling to seal the leakage of information about $\bfg$. As shown in 
+\cite{DBLP:conf/pqcrypto/HoffsteinPSSW14}, after rejection sampling,
+the distribution of 
+$\bfv $ will be computationally indistinguishable from uniform over $(-\frac{q}{2}+B_t, \frac{q}{2}-B_t)$
+for a public parameter $B_t$ which depends on $q$,  the (uniform) distribution of $\bfa$, and the number of $+1$s and $-1$s in $\bfg$.
+
+
+
+To avoid confusion, we will use $M_s$ to denote the rejection rate for
+the $s$-side, $M_t$ for the $t$-side, and $M$ for the overall rate.
+
+\subsection{The schemes}
+Now we are ready to present our proposed algorithms. Our scheme uses two
+types of parameters, one that employs Gaussian samplers and the other with
+uniform samplers. Algorithms for those two types of parameter sets 
+differ slightly due to the rejection sampling process. Below, we 
+present first the key generation algorithm, which remains the same for
+all parameters, and then algorithms for Gaussian samplings and uniform
+samplings, respectively.
+
+\paragraph{Key generation}:
+\begin{algorithm}
+\caption{Key Generation Algorithm}
+\begin{algorithmic}[1]\label{alg:keygen}
+\REQUIRE Parameters $N$, $p$, $q$, $d$ and $B_k$
+\ENSURE Public key $\bfh$ and secret key $(p\bff,\bfg)$
+\STATE $\bff \gets T(d+1,d)$  
+\LineIf {$\bff$ is not invertible mod $q$} {go to step 1}
+\LineIf {$\textsc{NormF}(\bff)\geq B_k$ } {go to step 1}
+\STATE $\bfg \gets T(d+1,d)$
+\LineIf {$\bfg$ is not invertible mod $p$} {go to step 4}
+\LineIf {$\textsc{NormF}(\bfg)\geq B_k$ } {go to step 4}
+\STATE $\bfh = \bfg/(p\bff) \bmod q$
+\RETURN $\bfh$, $\bfg$ and $\bff$
+\end{algorithmic}
+\end{algorithm}
+The key generation algorithm is shown in Algorithm \ref{alg:keygen}.
+We use the classical NTRU flat form (non-product form, cf. \cite{DBLP:conf/ctrsa/HoffsteinPSSWZ17}) keys 
+with a pre-fixed number of $+1$s and $-1$s. 
+Here, $T(d_1,d_2)$
+is a set of trinary polynomials of degree less than $N$, where there are exactly $d_1$ positive
+coefficients and $d_2$ negative coefficients.
+One can choose thicker
+keys for a higher level of security. Since we require both
+$\bff$ and $\bfg$ to be invertible, we have set $f(1) = g(1) = 1$.
+
+%\begin{remark}
+In BLISS \cite{DBLP:conf/crypto/DucasDLL13}, there is an extra rejection sampling 
+process on keys $\bff$ and $\bfg$ during key generation, so that $\|\bfa\bff\|$ is reasonably bounded for 
+efficient rejection sampling on signatures. 
+We use a similar approach, namely  $\textsc{NormF}$ for rejections. $\textsc{NormF}$
+is computed as $\|\bft\|_\infty$
+where $\bft = \sum_{i=0}^{N-1} x^if(x) \bmod (x^N+1)$.
+
+We view $\bfa\bff$ as a vector-matrix multiplication with vector $\bfa$ and matrix $\bfF$, the anti-cyclic rotation of $\bff$.
+Since $\bfa$ is binary, this multiplication can be seen as randomly adding some coefficients for each column of $\bfF$.
+Therefore, for a given $\bff$, the 
+corresponding $\bft(x)$, where
+the $i$-th coefficient of $\bft(x)$ is the sum of the $i$-th column of $\bfF$.
+will be correlated to the expected value of $\|\bfa\bff\|_\infty$.
+Rejection sampling on secret keys based on
+ the maximum norm of $\bft(x)$  will ensure that $\|\bfa\bff\|_\infty$ is also likely to be small.
+
+
+%We do not adopt this process. 
+%Rather we perform rejection sampling on $\|\bfa\bff\|$ during the signing procedure.
+%\end{remark}
+
+\subsubsection{The scheme with Gaussian sampling}
+
+
+\begin{algorithm}
+\caption{Signing for parameters with Gaussian distributions}
+\begin{algorithmic}[1]
+\REQUIRE Message $\mu$; Public key $\bfh$; Secret key $\bff$ and $\bfg$; Distribution $\chi_\sigma$
+\REQUIRE Parameters $N$, $p$, $q$, $M_s$, $B_s$, $B_t$
+\ENSURE A signature $\bfb$ for message $\mu$
+\STATE $(\bfu_p,\bfv_p)= \text{Hash}(\mu|\bfh)$
+\STATE $ \bfr \gets \chi_\sigma^N$, $b \gets \{0,1\}$
+\STATE $\bfu_1 = p\bfr+\bfu_p $; $\bfv_1 = \bfu_1\bfh\bmod q$
+\STATE $\bfa = (\bfv_p-\bfv_1)/\bfg \bmod p$
+\LineIf {$\|\bfa\bff\|_2>B_s$ or $\|\bfa\bfg\|_\infty>B_t$} {go to step 2}
+%\STATE $\bfu_2 = p\bfa\bfS_1$; $\bfv_2 = \bfa$
+\STATE $\bfv = \bfv_1+ (-1)^b\bfa\bfg$; %\bfv_2$; 
+\LineIf {$\|\bfv\|_\infty>q/2-B_t$} {go to step 2}
+%\STATE proceed with probability $\rho_t$; else go to step 2
+\RETURN $\bfb = (\bfr+(-1)^b\bfa\bff)$ with probability $1/\left(M_s \exp\left(-\frac{\|\bfa\bff\|}{2\sigma^2}\right)\cosh\left(\frac{\left<\bfb,\bfa\bff\right>}{\sigma^2}\right) \right)$
+\STATE go to step 2
+\end{algorithmic}
+\end{algorithm}
+\paragraph{Signing algorithm}:
+%The signing algorithm is very close to the one shown in the previous section
+%except for a few differences. 
+We make the following remarks about this signing algorithm:
+
+First, there is a factor of $\bfg^{-1}\bmod p$
+for step $4$, which is there to ensure the congruence condition for the $t$-side. 
+
+Second, in step $5$, we check the norm requirements for $\bfa\bff$ and $\bfa\bfg$. 
+This is to ensure that the rejection samplings in the followed steps 
+deliver the desired acceptance rate.   Note that $B_s$ is a public parameter depending only on $d_1,d_2$.   It is determined experimentally by an average over a large number of samples of $\bff$ chosen randomly from $T(d_1,d_2)$ and $\bfa$ chosen randomly and uniformly from $\ZZ_p^N$.
+
+
+Third, in step $7$,
+rejection sampling is performed on the $t$-side, parameterized by an additional 
+integer $B_t$. The distribution of the $t$-side
+vector will be uniform within the interval $(-\frac{q}{2}+B_t, \frac{q}{2}-B_t)$.   The public parameter $B_t$ is also computed as an average over a large number of choices of $\bfg$ and $\bfa$, as described in Section 6.1.
+
+Finally,  we have 
+\[(\bfu,\bfv) = (\bfu_1, \bfv_1) + (-1)^b(\bfu_2, \bfv_2)\]
+for a random bit $b$.
+This makes the raw distribution of $\bfb \defeq (\bfr+(-1)^b\bfa\bff) $
+a bimodal Gaussian distribution. 
+This allows us to achieve a higher acceptance rate for this distribution.
+Note that in the initial construction of BLISS \cite{DBLP:conf/crypto/DucasDLL13}, the bimodal Gaussian distribution makes a signature sometimes unverifiable due to the odd modulus $q$. BLISS
+solved this problem by moving the modulus from $q$ to $2q$. 
+We solve this problem by setting $p = 2$.
+It follows that
+%To make the original distribution of a signature bimodal Gaussian, 
+%we sample a bit $b$ uniformly
+%from $\{0,1\}$, and compute
+%\[(\bfu,\bfv) = (\bfu_1, \bfv_1) + (-1)^b(\bfu_2, \bfv_2).\]
+%With $p=2$, we know that 
+$\bfv \equiv \bfv_1 + (-1)^b(\bfv_p - \bfv_1)\equiv
+\bfv_p  \bmod 2$.
+\begin{algorithm}
+\caption{Verification for parameters with  Gaussian distributions}
+\begin{algorithmic}[1]
+\REQUIRE Message $\mu$; Public key $\bfh$; Signature $\bfb$; Parameters $p$, $q$, $B_t$, $\sigma$, $N$
+%\REQUIRE 
+\ENSURE Accept or Reject the signature
+\STATE $(\bfu_p,\bfv_p)= \text{Hash}(\mu|\bfh)$
+\STATE $\bfu = p\bfb + \bfu_p$
+\LineIf {$\|\bfu\|^2>p^2\sigma^2N$} {Reject}
+\STATE
+$\bfv = \bfu\bfh \bmod q$
+\LineIf {$\bfv\not\equiv \bfv_p \bmod p$ or $\| \bfv\|_\infty >q/2 - B_t$} {Reject}
+\RETURN Accept
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{The scheme with Uniform sampling}
+This version of the scheme uses the same key generation process as the one described in the previous section.
+\begin{algorithm}[H]
+\caption{Signing for parameters with uniform distributions}
+\begin{algorithmic}[1]
+\REQUIRE $(\bff, \bfg, \bfh, \mu)$, where $(\bff, \bfg)$ is a private key, $\bfh$ is the corresponding public key, and $\mu\in\{0,1\}^*$ is a document to be signed.
+\STATE $(\bfu_p,\bfv_p) \longleftarrow\text{Hash}\bigl(\bfh,\mu\bigr)$
+\REPEAT
+  \STATE $\bfr  \stackrel{\$}{\longleftarrow} \mathcal{U}^N_{\left\lfloor q/(2p)+0.5 \right\rfloor}$
+  \STATE $\bfu_0 \longleftarrow \bfu_p + p\bfr$
+  \STATE $\bfv_0 \longleftarrow \bfh\bfu_0\pmod{q}$ %with $\bft_0\in\Rcal(q/2)$
+  \STATE $\bfa \longleftarrow \bfg^{-1}(\bfv_p-\bfv_0)\pmod{p}$ %with $\bfa\in\Rcal(p/2)$
+  \STATE $(\bfu,\bfv) \longleftarrow (\bfu_0,\bfv_0) + (p\bfa\bff,\bfa\bfg)$
+\UNTIL $\bigl\|p\bfa\bff\bigr\|\le B_s$ and $\bigl\|\bfa\bfg\bigr\|\le B_t$ and $\bigl\|\bfu\bigr\|\le\dfrac{q}{2} - B_s$ and $\bigl\|\bfv\bigr\|\le\dfrac{q}{2} - B_t$
+\ENSURE $(\bfu,\bfv,\mu)$
+\end{algorithmic}
+\end{algorithm}
+\begin{remark}
+Notice the rejection criterion in Step~8 of the signing algorithm. We compute a
+potential signature~$(\bfu,\bfv)$, but then we reject it if it, or the
+correction~$(\bfa\bff,\bfa\bfg)$,  is too big; specifically, we
+reject~$(\bfu,\bfv)$ if it falls outside
+of~$L_\bfh\left(\frac{q}{2}-B_s,\frac{q}{2}-B_t\right)$, or if $(\bfa\bff,\bfa\bfg)$ falls
+outside $L_\bfh\left(B_s, B_t\right)$.
+\end{remark}
+
+\begin{algorithm}[H]
+\caption{Verification for parameters with uniform distributions}
+\begin{algorithmic}[1]
+\REQUIRE $(\bfu,\bfv,\mu,\bfh)$
+\STATE $valid \longleftarrow \textrm{yes}$
+\STATE $(\bfu_p, \bfv_p) \longleftarrow \text{Hash}(\bfh, \mu)$
+\IF{$\bfv \not\equiv \bfh  \bfu \pmod{q}$}
+%\IF{$(\bfs,\bft)\notin L_\bfh\left(\dfrac{q}{2}-B_s, \dfrac{q}{2}-B_t\right)$}
+    \STATE $valid \longleftarrow \textrm{no}$
+\ENDIF
+\IF {$\|\bfu\|>\dfrac{q}{2} - B_s$ or $\|\bfv\|>\dfrac{q}{2} - B_t$}
+    \STATE $valid \longleftarrow \textrm{no}$
+\ENDIF
+\IF{$(\bfu,\bfv)\not\equiv (\bfu_p,\bfv_p)\pmod{p}$}
+  \STATE $valid \longleftarrow \textrm{no}$
+\ENDIF
+\ENSURE $valid$
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\section{Design Rationale}
+\subsection{Hardness assumption}
+\subsubsection{Overview} We first give an overview of the hardness
+assumptions in this proposal.
+\begin{itemize}
+\item The hardness of a modular lattice signature scheme
+ over a generic lattice can be reduced to the
+short integer solution problem over this lattice. 
+This is not used in this submission, as it is too inefficient; however it gives confidence
+in the overall design of the framework.
+\begin{itemize}
+\item The public key security is based on the short integer solution
+problem.
+\item The forgery security is based on the learning with truncation 
+problem.
+\item The transcript security is provided by rejection samplings.
+\end{itemize} 
+\item \pqntrusign~is an efficient instantiation of modular lattice
+signature over the \ntru~lattice. This is the submission.
+\begin{itemize}
+\item The public key security is based on the \ntru~assumption.
+\item The forgery security is based on the learning with truncation 
+problem over \ntru~lattice.
+\item The transcript security is provided by rejection samplings.
+\end{itemize} 
+
+\end{itemize}
+
+\subsubsection{Details}
+
+For the sake of completeness, we present the related foundational hard problems. 
+A lattice $\Lcal$ is a discrete sub-group of $\RR^n$, or equivalently,
+the set of all the integral combinations of $d \leq n$ linearly independent vectors over $\RR$:
+$$\Lcal \defeq \ZZ \bfb_1+ \ZZ \bfb_2 + \dots + \ZZ \bfb_d , \bfb_i \in \RR^n.$$
+$\bfB \defeq ( \bfb_1 ,\dots ,\bfb_d )^T$ is called a basis of $\Lcal$.
+
+\begin{definition}[$\gamma$-SVP and uSVP]
+Given a lattice $\Lcal$, finding a vector that is no longer than $\gamma\cdot \lambda_1(\Lcal)$ is called the {\em approximate shortest vector problem ($\gamma$-SVP)}, 
+where $\lambda_1$ is the first minima, i.e, the length of the shortest vector, of the lattice.
+
+ Given a particular lattice $\Lcal$, where
+there exists a unique shortest non-zero vector, finding this vector is called the 
+{\em unique shortest vector problem}.
+\end{definition}
+
+We view an \ntru~lattice as an $\Rcal_q$ module of rank $2$. 
+Let $\bff, \bfg \in \Rcal_q$ with small coefficients.
+Let $\bfh = \bfg/\bff$ over $\Rcal_q$.
+The \ntru~lattice associated with $\bfh$ is defined as
+\[\Lcal \defeq \{(\bfs,\bft)\in \Rcal_q^2: \bft  \equiv  \bfs \bfh \mod q\}.\]
+\begin{definition}[\ntru~assumption]
+Given $\bfh$, it is believed to be hard to 
+find $\bff$ and $\bfg$.
+\end{definition}
+The \ntru~assumption can be reduced to the uSVP for the \ntru~lattice.
+\begin{definition}[LWT$_{q,p,n,m}$]
+Let $q,p,n, m$ be positive integers with $p$ co-prime to $q$.
+Sample uniformly at random a matrix $\bfA\in \ZZ_q^{n\times m}$ and a vector $\bfs\in \ZZ^n_q$; compute $\bfb = \bfs\bfA \bmod q  \bmod p$; the decisional LWT problem is: given two pairs  $(\bfA,\bfb)$ and 
+$(\bfA,[\bfu]_p)$, where $\bfu$ is sampled uniformly
+at random in $\ZZ^n_q$, distinguish those two pairs.
+The computational problem is: given 
+$(\bfA,\bfb)$, find $\bfs$.
+\end{definition}
+It was shown in \cite{cryptoeprint:2017:995} that the LWT problem is 
+equivalent to the LWR problem with $ r \equiv p^{-1} \mod q$, where 
+LWR is defined as follows:
+\begin{definition}[LWR$_{q,r,n,m}$] Sample uniformly at random a matrix $\bfA\in \ZZ_q^{n\times m}$ and a vector $\bfs\in \ZZ^n_q$; compute $\bfb = \lfloor\bfs\bfA \bmod q \rfloor_r$; the decisional LWR problem is: given two pairs  $(\bfA,\bfb)$ and 
+$(\bfA,\lfloor\bfu\rfloor_r)$ where $\bfu$ is sampled uniformly
+at random in $\ZZ^n_q$, distinguish those two pairs.
+The computational problem is: given 
+$(\bfA,\bfb)$, find $\bfs$.
+\end{definition}
+
+It has been shown in \cite{DBLP:conf/crypto/AlwenKPW13} that the decisional LWR$_{q,r,n,m}$ problem is hard assuming the hardness
+of LWE$_{q,r,n,m'}$ with parameters
+$$
+m \geq \frac{\log(q)}{\log (2\gamma)} \cdot m'
+\quad\quad
+\text{and}\quad\quad
+q \geq \gamma(nm\beta p)
+$$
+for some $\gamma\geq 1$. %To the best of our knowledge, we are not aware of
+%reductions between computational LWR and other assumptions.
+
+
+\subsection{Rejection sampling and sampler agility}
+Early lattice based signature schemes, such as GGHSign \cite{DBLP:conf/crypto/GoldreichGH97a} and NTRUSign \cite{DBLP:conf/ctrsa/HoffsteinHPSW03}, leak private key information in a transcript of message/signature pairs. An attacker can produce a signing key from a long enough transcript using methods for ``learning a parallelepiped" \cite{DBLP:journals/joc/NguyenR09,DBLP:conf/asiacrypt/DucasN12a}.
+
+In \cite{lyu09}, Lyubashevsky proposed a rejection sampling method to thwart transcript leakage attacks. Using his technique, signatures are produced according to a fixed public distribution (typically either a Gaussian as in \cite{lyu09} or a uniform distribution as in \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14}). A transcript reveals only this public distribution, and contains no information about the particular signing key that is used to generate the signatures. 
+
+
+The {\em sampling method} therefore becomes a core issue in designing signature schemes.
+For example, replacing a Gaussian sampler with a bimodal Gaussian sampler \cite{DBLP:conf/crypto/DucasDLL13} significantly improves the performance of a scheme.
+However, although schemes using Gaussian sampling allow smaller signature sizes, recent developments in lattice based signature schemes \cite{DBLP:journals/iacr/DucasLLSSS17} shows a trend toward moving back
+to uniform rejection sampling, since uniform sampling is easier to implement and to 
+ensure constant time.  
+In comparison, there are side-channel attacks on some lattice based
+signature schemes exploiting the Gaussian look-up tables \cite{DBLP:conf/ches/BruinderinkHLY16}.
+
+In this submission, we 
+build in {\em sampler agility} by 
+allowing the user to choose either a 
+(bimodal) Gaussian sampler or a uniform sampler.
+In particular, we provide a structured API for Gaussian samplers
+with the hope that more efficient and secure samplers 
+are developed during the process of this call for proposals
+from NIST. We also remark that in the use cases where side channel
+attacks are not a concern, one can still use a (bimodal) Gaussian sampler for better performance.
+ 
+%\end{remark}
+%\subsection{Signature simulation}
+\subsection{Transcript simulation}
+By Theorem 4.6 of  \cite{lyu12} a transcript produced by this signing algorithm will consist of a triple $(\bfu_p,\bfv_p,\bfb)$, with distribution $U_p^N \times U_p^N \times \mathcal{D}^N$, where $U_p$ is uniform mod $p$ and $\mathcal{D}^N$ is our input distribution, i.e.,  a discrete Gaussian distribution or uniform distribution.
+Such a transcript, indistinguishable from a genuine transcript, can be simulated without knowledge of the secret key in the following way: 
+
+\begin{enumerate}
+\item
+Choose $\bfb$ at random from  $\mathcal{D}^N$
+\item
+Set $\bfu = p\bfb +\bfu_p$, with entries of $\bfu_p$ chosen at random 
+$\bmod \,p$ 
+\item
+Set $\bfv \equiv \bfu \bfh \mod q$, and lift $\bfv$ to the interval $(-q/2,q/2]$
+\item
+Reject if  $\| \bfv\|_\infty >q/2 - B_t$ and return to Step 1.  Otherwise 
+set $\bfv_p \equiv \bfv \mod \, p$ and  accept 
+$\bfb$ as a signature on $\bfu_p, \bfv_p$
+\end{enumerate}
+
+It is easy to see that such a simulation will generate a triple 
+$(\bfu_p,\bfv_p,\bfb)$ that appears to be a legitimate transcript, in
+the case of uniform distribution.
+
+In the case of bimodal Gaussian distribution, 
+because of the potential for rejection of a genuine signature in steps 2 and 3 of the verification algorithm,  it appears at first that some message digests $(\bfu_p,\bfv_p)$, originally chosen by the hash function to be uniform from $U_p^n \times U_p^n$, might be rejected, (by the $L^2$ condition), leading to an unknown asymmetrical distribution of the $(\bfu_p,\bfv_p)$ in genuine signatures.   However, the parameters are selected so that the chances of this occurring are less than $2^{-128}$.   Therefore to simulate transcripts computationally indistinguishable from genuine ones, it suffices to 
+select, in the simulation process, $\bfu_p$ uniformly from $U_p^n$.   In step 4 of the simulation process, the $\bfv_p$ is chosen by setting $\bfv_p \equiv  \bfu \bfh \mod q \mod p$, and via rejection sampling, $\bfu \bfh \mod q$ is guaranteed to have entries uniformly and randomly distributed in the interval $[-q/2+B_t,q/2-B_t]$.  We are making the assumption, born out by experiment, that after reduction mod $p$ this produces a $\bfv_p$ with entries uniformly distributed mod $p$.
+
+
+\subsection{Parameters}
+We give 2 sets of parameters, namely, \textsf{Gaussian-1024} and \textsf{Uniform-1024}  in Table \ref{tab:param}.
+%We present our parameter sets  
+%and the macros related  to NIST's APIs in Table \ref{tab:macro}.
+We estimate that 
+\begin{itemize}
+\item \textsf{Gaussian-1024} and \textsf{Uniform-1024} provide 269 bits of classical security
+and 149 bits of quantum security;
+\end{itemize}
+The details of the above estimations shall be presented in the next subsection.
+Note that the parameter sets in this proposal are not
+the same as in \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14,cryptoeprint:2017:995} due to the 
+use of a different estimation model. In previous
+estimations we simply followed the work of \cite{BKZ2}
+and \cite{DBLP:conf/crypto/DucasDLL13} by assuming 
+a root Hermite factor of 1.005 is not achievable.
+Here we use a more rigorous estimation for our new
+parameter sets.
+
+\begin{table}\centering
+\caption{Parameters.}\label{tab:param}
+\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+\textsc{Param}&$\Rcal, N, q$ & $d_f, d_g$ & $\sigma$ & $B_k, B_s, B_t$ & Raw PK size & Raw Sig size\\\hline
+\textsf{Gaussian-1024}&$\frac{\ZZ_q[x]}{x^N+1}, 1024, 2^{16}+1$ & 205 & 250 & 40, 500,49 & 16384 bits & $\approx$ 11264 bits \\
+
+\textsf{Uniform-1024}&$\frac{\ZZ_q[x]}{x^N+1}, 1024, 2^{16}+1$ & 205 & N/A & 40, 98, 49 &16384 bits & 16384 bits 
+
+\\\hline
+\end{tabular} 
+
+
+\end{table}
+
+
+
+\begin{table}
+\centering
+%\begin{threeparttable}
+\caption{MACRO definitions for NIST's API}
+\label{tab:macro}
+\begin{tabular}{|c||c|c|c|c|c|c|c|}\hline
+\textsc{Param} & 
+\textsf{Gaussian-1024}  & \textsf{Uniform-1024}
+\\\hline
+CRYPTO\_SECRETKEYBYTES & 2604 & 2604\\
+
+CRYPTO\_PUBLICKEYBYTES &2065&2065 \\
+CRYPTO\_BYTES &2065&2065 \\\hline
+\end{tabular}\\ 
+\end{table}
+We list the related Marcos in Table \ref{tab:macro}. 
+Note that the secret key field contains both public key $\bfh$ and private
+keys $\bff$ and $\bfg$, as well as intermediate
+data $\bfg^{-1} \bmod p$ in the secret key.
+For minimum storage, one can simply store $\bff$ and $\bfg$, and compute $\bfh$ and $\bfg^{-1}$ on the fly.
+Also note that the signature size for \textsf{Gaussian-1024}
+is greater than that in Table \ref{tab:param} because
+we did not implement Hoffman encoding.
+
+For all 5 NIST's required security levels, we
+suggest the use of \textsf{Gaussian-1024} or \textsf{Uniform-1024} parameter sets.
+
+
+
+
+\subsection{Best known attacks}\label{sec:known_attack_security}
+\subsubsection{Overview}
+In this evaluation, we will
+\begin{enumerate}
+
+
+\item follow the original BKZ 2.0 analysis \cite{BKZ2} with the extreme pruning method to estimate
+the {\bf classical security};
+\item follow the new analysis in \cite{newhope} using BKZ 2.0 with quantum sieving to estimate
+the {\bf quantum security}.
+\end{enumerate}
+\noindent
+For completeness, we also give the analysis result
+of 
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item   the new analysis in \cite{newhope} using BKZ 2.0 with classical sieving.
+\end{enumerate}
+However, we will {\bf not} use this result to estimate the classical security, due to the excessive
+space requirement. For more details and justifications please see our other
+submission on NTRU encryption algorithms.
+
+
+\begin{table}\centering\caption{Lattice strength given by root Hermite factor}
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+& \textsf{Gaussian-1024} &
+\textsf{Uniform-1024} 
+\\\hline
+Public key strength $\left(\frac{\text{GH}}{\lambda_1}\right)^\frac{1}{2N}$ &   \multicolumn{2}{c|}{$524^\frac{1}{2048}\approx 1.0030$} \\\hline
+Forgery strength  $\left(\frac{\|\bfu,\bfv\|}{\text{GH}}\right)^\frac{1}{2N}$ & $25^\frac{1}{2048}\approx 1.0016$ & $153^\frac{1}{2048}\approx 1.0024$\\\hline%\hline
+
+\end{tabular} \\\label{tab:rhf}
+
+\end{table}
+For signatures, there are two types of attacks, namely,
+public key attacks which try to recover the secret key
+from a public key, and forgery attacks, which try to 
+forge a signature without a secret key.
+As we shall see from Table 
+\ref{tab:rhf}, forgery attacks are strictly harder than
+public key attacks, due to the smaller root Hermite factors. 
+Therefore, our focus here is to evaluate the security
+of the public keys, i.e., recovering $\bff$ or $\bfg$ from
+$\bfh$.
+
+Here, we summarize the evaluations in Table \ref{tbl:cost}.
+For more details on the cost analysis of BKZ and hybrid
+attacks, please see our other submission on \ntru~encryption
+algorithms. For completeness, we also present the best known forgery
+attack.
+\begin{table}
+\centering
+%\begin{threeparttable}
+\caption{Best known attacks and their costs on public keys}
+\label{tbl:cost}
+\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+\multirow{2}{*}{N}  &\multicolumn{2}{|c|}{BKZ + Enum}& \multicolumn{2}{|c|}{BKZ + Sieving}& \multicolumn{2}{|c|}{BKZ + QSieving}\\
+\cline{2-7}
+ &uSVP & Hybrid&uSVP & Hybrid&uSVP & Hybrid\\\hline\hline
+1024 & 407 & {\bf 269} & 165 & 165 & {\bf 149} & 154\\\hline
+
+\end{tabular}
+\end{table}
+
+
+
+\subsubsection{Public keys.}
+The best known attacks against \ntru~lattices are the hybrid attack
+\cite{Howgrave-Graham2007}  
+combining lattice reductions and meet-in-the-middle attacks,
+and lattice reduction attacks using BKZ with (quantum) sieving.
+The strength of these attacks, as well as the analysis of parameters for \ntru~lattices that are 
+secure from these attacks, are shown in \cite{DBLP:conf/ctrsa/HoffsteinPSSWZ17} and our other submission on NTRU encryption
+algorithms.
+
+Essentially, the public key strength is determined by the hardness of the unique 
+shortest vector
+problem of the NTRU lattice,
+which is related to the $2N$-th root of the following quantity:
+\[
+\frac{\text{Gaussian Heuristic Length}}{\lambda_1}=
+\frac{\sqrt{2N/(2\pi e)}q^{N/(2N)}}{\|\bff,\bfg\|_2} = 
+\sqrt{\frac{Nq/(\pi e)}{2d_f+2d_g+2}}.
+\]
+
+\subsubsection{Forgeries.} The best forgery attack, other than 
+deriving the secret keys from the public keys via the above 
+attacks, is 
+the lattice reduction attack
+shown in \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14}.   Forging a signature can be accomplished if an associated approximate closest vector problem in the intersection of the NTRU lattice, and $p\ZZ^{2N}$ can be solved.  
+Therefore, the task of forgery can be solved by finding a vector that meets the congruence mod $p$ requirements, and is sufficiently close to the intersection lattice to satisfy the length requirement.
+
+This problem is harder than that of finding a short vector in the intersection lattice, and so to simplify our analysis we will use this to quantify the strength of the lattice problem.
+The intersection lattice is generated by the rows of the matrix
+$$
+\begin{bmatrix}
+0& pq\bfI_N \\
+p \bfI_N&p \bfH' \\
+\end{bmatrix},
+$$
+for some appropriate $\bfH'$.
+We also assume that this lattice behaves like a random lattice.
+
+For {\sf Uniform-1024}, each coordinate of $\bfu$ (and $\bfv$) is approximately randomly and uniformly distributed between $-q/2+B_s$ and $q/2-B_s$ ($-q/2+B_t$ and $q/2-B_t$, resp.) . % As uniformly distributed vectors in high dimensions are close to orthogonal, It follows that 
+%$$
+%\|\bfv\|^2 \approx \sum_{i=1}^k\|\bfv_i\|^2.
+%$$
+%Each coordinate of $\bfv_i$ will be approximately randomly and uniformly distributed between $-q/2+B_t$ and $q/2-B_t$.   
+Ignoring the $B_s$, the average squared coefficient will be approximately
+$$
+\frac{1}{q}\int_{-q/2}^{q/2}x^2 dx =q^2/12.
+$$
+Thus $\bfu$ and $\bfv$ will have norm $\|\bfu\|^2\approx \|\bfv\|^2 \approx q^2N/12$.    
+We thus have 
+$$
+\frac{\text{Target Length}}{\text{Gaussian Heuristic Length}}
+ = \frac{\sqrt{q^2N/6}}{\sqrt{Np^2q/\pi e}} = \sqrt{
+ \frac{q\pi e}{6p^2}}.
+$$
+
+For {\sf Gaussian-1024},
+notice that the lattice is not ``balanced" as $\|\bfu\|$ is significantly smaller than $\|\bfv\|$.
+%The target vector will be $(\bfu,\bfv)$ satisfying the norm bound 
+%$\|\bfu\|^2q^2/(12p^2\sigma^2 k) + \|\bfv\|^2 <q^2N/6$.
+In general, if the target is a vector $(\bfu,\bfv)$, with $\bfu,\bfv$ each $N$-dimensional, and satisfying $\|\bfu\| \approx a\sqrt{N}$ and $\|\bfv\| \approx b\sqrt{N}$, then the optimal matrix for maximizing strength against lattice reduction attacks, that is, minimizing the ratio of the norm of the target of the Gaussian expected norm, is the $2N$ by $2N$ matrix
+$$
+ \begin{bmatrix}
+0&  p q\bfI_N\\
+\alpha p\bfI_N& p\bfH \\
+\end{bmatrix},
+$$
+%$$
+% \begin{bmatrix}
+%0&  p q\bfI_N&0 \\
+%\alpha p\bfI_N& p\bfH&0 \\
+%0\cdots 0&0\cdots 0&1
+%\end{bmatrix},
+%$$
+with $\alpha$ chosen so that $\alpha = b/a$.   %Here the right hand column is 0, except for a 1 at the bottom, as is the bottom row. 
+
+The vector $(\alpha \bfu,\bfv)$ will be a short vector in this matrix, and it is not surprising that the optimal $\alpha$ equalizes  the lengths of the vectors $\alpha \bfu$, and $\bfv$.  We omit the details justifying this.
+
+We now determine the values of $a,b$ in our case.
+ As it is a  vector with each coordinate choses from the Gaussian distribution, the expected norm of $\|\bfu\|$ will satisfy 
+$\|\bfu\|^2 \approx p^2 \sigma^2 N$.   
+Thus $a = p \sigma$.
+Also, 
+%each coordinate of $\bfv$ is approximately randomly and uniformly distributed between $-q/2+B_t$ and $q/2-B_t$. % As uniformly distributed vectors in high dimensions are close to orthogonal, It follows that 
+%$$
+%\|\bfv\|^2 \approx \sum_{i=1}^k\|\bfv_i\|^2.
+%$$
+%Each coordinate of $\bfv_i$ will be approximately randomly and uniformly distributed between $-q/2+B_t$ and $q/2-B_t$.   
+%Ignoring the $B_t$, the average squared coefficient will be approximately
+%$$
+%\frac{1}{q}\int_{-q/2}^{q/2}x^2 dx =q^2/12.
+%$$
+%Thus 
+$\bfv$ will have norm $\|\bfv\|^2 \approx q^2N/12$, so $b = q/\sqrt{12}$ .    
+
+As stated above, in our particular case $a = p\sigma$, $b = q/\sqrt{12}$,  so
+ $\alpha = q/(p\sigma \sqrt{12})$, 
+and the length of the target is
+$$
+\text{Length target} \approx b\sqrt{2N} =  q \sqrt{N/6}.
+$$ 
+For general, $a,b$, and $\alpha = b/a$, 
+the determinant of the matrix is $\alpha^Np^{2N}q^N$, and thus the length of the Gaussian expected shortest vector is 
+$$
+\text{Gaussian Heuristic Length} =\alpha^{1/2}pq^{1/2} \sqrt{\frac{2N}{2\pi e}}=\sqrt{\frac{Npq^2}{\pi e\sigma \sqrt{12}}}
+$$
+We thus have 
+$$
+\frac{\text{Target Length}}{\text{Gaussian Heuristic Length}}
+ = \sqrt{\frac{\pi e \sigma }{p \sqrt{3}}},
+$$
+%$$
+%\frac{\text{Gaussian Heuristic Length}}{\text{Target Length}}=
+% %= \frac{p\sqrt{Nq\alpha}}{b\sqrt{2N\pi e}}
+%= = p\sqrt\frac{q}{ab2\pi e}.
+%$$
+%$$
+%\left(\frac{12}{k}\right)^{1/4}\sqrt{\frac{p}{2\pi e \sigma}}.
+%$$
+and the strength against forgery is determined by the $2N^{th}$ root of this ratio, which equals
+%$$
+%\left(\left(\frac{12}{k}\right)^{1/4}\sqrt{\frac{p}{2\pi e %\sigma}}\right)^{1/(2N)}.
+%$$
+$$\left(\frac{\pi e\sigma }{p\sqrt{3}}\right)^{1/(4N)}.$$
+
+
+%\begin{table}\centering
+%\begin{tabular}{|c|c|c|c|c|}\hline
+%& $k=1$ & $k = 529$  & $k = 2000$\\\hline
+%Public key strength $\left(\frac{\text{GH}}{\lambda_1}\right)^\frac{1}{2N}$ & \multicolumn{3} {c|}{$112^\frac{1}{2N} = 1.0046$ } \\\hline
+%Forgery strength  $\left(\frac{\|\bfu,\bfv\|}{\text{GH}}\right)^\frac{1}{2N}$ &$16^\frac{1}{2N} =1.0027$ & $78^\frac{1}{2N} = 1.0043$ & $109^\frac{1}{2N} = 1.0046$\\\hline%\hline
+%\end{tabular} \\\label{tab:128}
+%$k = 1$: single verification case \\
+%$k = 529$: theoretical bound without verification errors \\
+%$k = 2000$: practical bound from experiments without verification errors 
+%\caption{Lattice strength given by root Hermite factor}
+%\end{table}
+We estimate that our parameter set delivers 128 bits security against classical
+and quantum attackers, assuming the complexity of BKZ 2.0 using
+enumeration with extreme pruning \cite{BKZ2,GNR10}. This is using the same metric as was used in \cite{DBLP:conf/crypto/DucasDLL13} and \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14}.
+
+
+
+
+\subsection{Advantages and limitations}
+\paragraph{Smaller signature size by design.}
+
+Recall that in \cite{DBLP:conf/pqcrypto/HoffsteinPSSW14},
+ a signature in this scheme is a lattice vector.
+Since the verifier already knows a (bad) basis of the lattice for
+verification purpose, it is sufficient to transmit part of the vector
+$\bfv$ as long as the verifier can complete the whole vector during 
+the verification phase.
+
+Popular lattice based schemes, such as BLISS \cite{DBLP:conf/crypto/DucasDLL13} and TESLA \cite{DBLP:journals/iacr/AlkimBBD15}, do not 
+have this property. Signatures in those schemes are vectors 
+{\em close} to the lattice. Hence, when the vectors are compressed,
+an additional helper needs to be generated for the verifier to 
+derive the original vector (although this helper is only a few
+hundred bits). To be precise, if we parameterize the scheme to be 
+presented in this paper with the same parameters as  in \cite{DBLP:conf/crypto/DucasDLL13},
+the difference in the size of a signature is exactly the size
+of this helper.
+\paragraph{Hash-then-sign methodology.}
+In the area of classical cryptography,
+there are two main methods to build digital signatures, namely,
+ Schnorr signatures and hash-then-sign signatures.
+However, in terms of lattice based signatures,
+almost all popular candidate use the framework of
+the Shnorr signature. 
+The \pqntrusign~scheme we submit gives an alternative solution to
+the Schnorr based solutions.
+
+\paragraph{\ntru~trapdoor.}
+In general, lattice based signatures offer the best performance among quantum-safe solutions, in terms of the combination of signature 
+sizes and public key sizes. However, the performance changes greatly 
+with how the trapdoor is constructed. The \ntru~trapdoor is in 
+general the most efficient one in the literature;  It has survived
+20 years of cryptanalysis, which no other lattice-based solution 
+has gone through.
+
+\paragraph{Sampler agility.}
+Our proposal provides sampler agility. We provide solutions for both
+uniform samplers and Gaussian samplers; and an easy migration path
+should new and more efficient Gaussian samplers are invented.
+This allows for security oriented adoptions (with uniform sampling)
+and performance oriented adoptions (with Gaussian sampling).
+
+%\paragraph{Potential application for signature aggregation}. {\bf ZZ: shall we mention it at all?}
+\subsection{Performance and implementations}
+%\subsection{Performance Analysis}
+We present the implementation results in Table \ref{tab:bench}.
+
+\begin{table}\centering\caption{Benchmark results}
+\begin{tabular}{|c|c|c|c|c|c|}\hline
+& \textsf{Gaussian-1024} &
+\textsf{Uniform-1024} 
+\\\hline\hline
+Key Generation &  47.8 ms & 48.9 ms\\\hline
+Signing & 120ms & 72 ms \\\hline%\hline
+
+Verification & 0.96 ms  & 0.97 ms\\\hline%\hline
+%PK size & & \\\hline
+%SK size & & \\\hline
+
+
+\end{tabular} \\\label{tab:bench}
+\end{table}
+\paragraph{Optimizations not in this submission package.}
+There are three optimizations that we are aware of, that are not 
+included in this submission package. Namely
+\begin{enumerate}
+
+
+\item AVX2 based optimization for polynomial multiplication \cite{ntrutoc}; this accelerates polynomial multiplication by $2.3$ times.
+\item GPU based optimization \cite{DBLP:conf/ieeehpcs/DaiSSWZ16}; this 
+accelerates signature generation by $31$ times.
+\item Product form polynomials \cite{DBLP:conf/ctrsa/HoffsteinPSSWZ17}; this speeds 
+polynomial multiplications by around 3 times.
+\item Signature aggregation \cite{cryptoeprint:2017:995}; this allows one to verify a batch of 500 or more signatures
+(under a same signing key) with a single ring multiplication.
+\end{enumerate}
+We do not provide the first two optimizations, since they are prohibited
+by the submission. We also do not provide the third optimizations
+for conservative purpose. The fourth optimization is out of scope of this
+submission.
+
+\paragraph{Potential improvement not in this submission package.} 
+There are also three potential improvements that we are aware of, but
+are not included in this submission.
+\begin{enumerate}
+\item A better Gaussian sampler.
+\item A security argument against a quantum random oracle.
+\item Efficient Number Theoretic Transform (NTT). 
+\item Hoffman encoding on Gaussian vectors.
+\end{enumerate}
+The first two items are active research area. We believe that we shall
+see many improvements from the PQC community and it is too early to fix
+on a single solution. We shall include those improvements once they are
+available, and when a minor revision is allowed. Nonetheless, we remark
+that our Box-Muller based Gaussian sampler is already quite efficient, 
+and has previously been used in the literature, for example in HElib \cite{DBLP:conf/crypto/HaleviS14}. 
+
+We did not implement item 3 due to time constrains. Our naive
+ NTT algorithm takes roughly $O(N^2/2)$ operations where $N$ is the degree
+ of the polynomial. We are aware of the Cooley-Tukey method which runs 
+in $O(N\log N)$ time, and improves signing speed up to 10 times in practice. This improvement will potentially 
+increase the key generation speed; our signing and 
+verification algorithms does not use NTT.
+We are willing to provide implementation during the revision phrase. 
+
+The 4th item is a well known algorithm. It will improve
+the signature size when Gaussian sampling is used. However, a side effect is that the
+length of the signatures will be a variable and thus
+make it difficult to deal with the provided API. 
+Nonetheless, in practice it is suggested that  using this 
+encoding will lead to the best performance.
+
+\subsection{Known Answer Test Values}
+A set of KAT values are provided in the KAT folder.
+
+\section{IPR Statement}
+All the related statements are provided in the statement folder.
+
+
+\bibliographystyle{plain}
+\bibliography{ntrumls}
+
+
+\end{document}
+

@@ -1,0 +1,13 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+*.o
+*.d
+*.pyc
+*.swp
+tags
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.toc
